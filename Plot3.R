@@ -1,7 +1,6 @@
 #plot 3 
 #gather data
 
-SCC <- data.table::as.data.table(x = readRDS(file = "Source_Classification_Code.rds"))
 NEI <- data.table::as.data.table(x = readRDS(file = "summarySCC_PM25.rds"))
 
 
@@ -14,6 +13,8 @@ Baltimore_emission_by_type <- NEI %>% group_by(type, year) %>% filter(fips == "2
 
 #Plot the data accordingly
 
+png("Plot 3.png", width=480, height=480)
+
 g<-ggplot(Baltimore_emission_by_type, aes(x = factor(year), y = total, fill = type, label = round(total)))
 g <-g+  geom_col()   
 g <-g+  facet_grid(. ~ type)
@@ -21,3 +22,4 @@ g <-g+   ggtitle("Total PM2.5 Emissions in Baltimore City, Maryland") + xlab("Ye
 g <-g+  theme_classic()+  theme(plot.title = element_text(hjust = 0.5))
 g
 
+dev.off()

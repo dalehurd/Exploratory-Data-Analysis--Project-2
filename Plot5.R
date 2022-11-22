@@ -17,9 +17,14 @@ vehicle_aggregate <- Vehicle_emission %>% filter(fips == "24510") %>% group_by(y
 
 #Plot total emissions from motor vehicle sources in Baltimore City
 
+png("Plot 5.png", width=480, height=480)
+
 g <- ggplot(vehicle_aggregate, aes(factor(year), total, label = round(total))) 
 g <- g+  geom_col( fill = "purple") 
 g <- g+  ggtitle("Vehicle Emissions in Baltimore City") 
 g <- g+  xlab("Year") + ylab("PM2.5 Emissions in Tons")
 g <- g+  ylim(c(0, 450)) + theme_classic()+ geom_text(size = 5, vjust = -1) 
 g <- g+  theme(plot.title = element_text(hjust = 0.5))+  theme_classic()
+g
+
+dev.off()
